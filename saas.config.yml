@@ -1,0 +1,22 @@
+saas:
+  name: "ClickDialog"
+  slug: "clickdialog"
+  description: "Registry + Analytics + Dashboard multi-tenant"
+
+branding:
+  primary_color: "#0F172A"
+  accent_color: "#22C55E"
+  logo_text: "ClickDialog"
+  typography: "Inter"
+  sidebar_style: "default"
+
+modules:
+  auth: true
+  landingpages: true
+  chatbot: true
+  analytics: true
+
+features:
+  multi_tenant: true
+  roles: ["superadmin", "admin", "client"]
+  database: "sqlite"  # sqlite | postgres (postgres: infra futura)
