@@ -1,0 +1,28 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { getNavItems } from "../core/nav";
+const { title = "ClickDialog · Dashboard" } = Astro.props;
+const nav = getNavItems();
+---
+<BaseLayout title={title}>
+  <div class="container grid two" style="grid-template-columns: 260px 1fr;">
+    <aside class="card" style="height: calc(100vh - 48px); position: sticky; top: 24px;">
+      <div style="font-weight: 800; letter-spacing: .2px; margin-bottom: 10px;">ClickDialog</div>
+      <div class="muted" style="font-size: 12px; margin-bottom: 16px;">Registry + Analytics + Dashboard multi-tenant</div>
+      <nav class="grid" style="gap:10px;">
+        {nav.map(item => (
+          <a class="btn" href={item.href} style="justify-content:flex-start;">
+            <span>{item.label}</span>
+          </a>
+        ))}
+      </nav>
+      <div class="muted" style="font-size:12px; margin-top: 18px;">
+        Módulos: {nav.length}
+      </div>
+    </aside>
+
+    <main style="min-height: calc(100vh - 48px);">
+      <slot />
+    </main>
+  </div>
+</BaseLayout>

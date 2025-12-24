@@ -1,0 +1,34 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+
+# Flask / instance / sqlite
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Env
+.env
+
+# Node / Astro
+node_modules/
+dist/
+.astro/
+.cache/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

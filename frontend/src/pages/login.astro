@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Login · ClickDialog">
+  <div class="container" style="max-width: 520px;">
+    <div class="card">
+      <div class="muted" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase;">Auth</div>
+      <h1 style="margin: 10px 0 6px 0;">Login</h1>
+      <p class="muted" style="margin: 0 0 14px 0;">Este login es el stub inicial. La UI real se itera por módulo.</p>
+
+      <form id="f" class="grid" style="gap: 10px;">
+        <input class="input" name="email" placeholder="admin@local" />
+        <input class="input" name="password" type="password" placeholder="admin" />
+        <button class="btn primary" type="submit">Entrar</button>
+      </form>
+
+      <div id="out" class="muted" style="margin-top: 12px; font-size: 13px;"></div>
+      <div class="muted" style="margin-top: 10px; font-size: 12px;">
+        Tip dev: primero corré <code>POST /api/auth/seed</code> (backend) para crear admin.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("f");
+    const out = document.getElementById("out");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      out.textContent = "Logueando...";
+      const fd = new FormData(form);
+      const payload = { email: fd.get("email"), password: fd.get("password") };
+      const res = await fetch("http://localhost:5005/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const j = await res.json().catch(() => null);
+      if (!j || !j.ok) {
+        out.textContent = "Error: " + (j?.error?.message || "Desconocido");
+        return;
+      }
+      localStorage.setItem("token", j.data.token);
+      out.textContent = "OK. Token guardado en localStorage.";
+    });
+  </script>
+</BaseLayout>

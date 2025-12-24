@@ -1,0 +1,13 @@
+# Caddyfile snippet para clickdialog
+clickdialog.tu-dominio.com {
+  encode zstd gzip
+
+  # Frontend (static)
+  root * /opt/clickdialog/frontend/dist
+  file_server
+
+  # Backend API
+  handle_path /api/* {
+    reverse_proxy 127.0.0.1:5005
+  }
+}
